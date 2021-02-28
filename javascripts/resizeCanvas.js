@@ -15,32 +15,22 @@
 	const	context	= canvas.getContext('2d');
 
 	// Image name
-	const imageName	= document.currentScript.getAttribute('imageName');
+	const imageName	= document.currentScript.getAttribute('imagePath');
 
-	// Mascot image
-	var	mascotImage		= null;
+	// Resized image
+	var	resizedImage	= null;
 	
 	// Resize the canvas to fill browser window dynamically
-	window.addEventListener('resize', resizeCanvas, false);
+	window.addEventListener('resize', render, false);
 
-	// Pre-load images and then draw the images
-	window.addEventListener("DOMContentLoaded", preloadImages, true);
+	// Pre-load images
+	window.addEventListener("DOMContentLoaded", preloadImage, true);
 
-	function resizeCanvas()
+	function preloadImage(event)
 	{
-		render();
-	}
-
-	function preloadImages(event)
-	{
-		mascotImage		= new Image();
-		mascotImage.src	= imageName;
-		mascotImage.addEventListener("load", trackProgress, true);
-	}
-
-	function trackProgress()
-	{
-		resizeCanvas();
+		resizedImage		= new Image();
+		resizedImage.src	= imageName;
+		resizedImage.addEventListener("load", render, true);
 	}
 
 	function render()
@@ -50,15 +40,15 @@
 		canvas.width	= window.innerWidth;
 		canvas.height	= window.innerHeight - rect.top;
 
-		if (mascotImage != null)
+		if (resizedImage != null)
 		{
 			var	scale		= window.innerHeight / defaultHeight * defaultScale;
 			var	offsetScale	= window.innerWidth / defaultWidth;
-			var	width		= mascotImage.width * scale;
-			var	height		= mascotImage.height * scale;
+			var	width		= resizedImage.width * scale;
+			var	height		= resizedImage.height * scale;
 			var	x			= (canvas.width - width) / 2 + (defaultXOffset * offsetScale);
 
-			context.drawImage(mascotImage, x, 0, width, height);
+			context.drawImage(resizedImage, x, 0, width, height);
 		}
 	}
 })();
