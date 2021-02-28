@@ -1,0 +1,26 @@
+html
+{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body
+{
+	background-image: url('../images/Background.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.introText
+{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 3vw;
+	width: 100%;
+	height: 20%;
+}
