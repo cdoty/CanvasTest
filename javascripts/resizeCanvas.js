@@ -7,15 +7,21 @@
 	const	defaultWidth	= 1920;
 	const	defaultHeight	= 1080;
 	
-	// Default image scale
-	const	defaultScale	= document.currentScript.getAttribute('imageScale');
-	const	defaultXOffset	= document.currentScript.getAttribute('offset');
+	var	imageScale	= document.currentScript.getAttribute('imageScale');
 
-	// 2D context of canvas
-	const	context	= canvas.getContext('2d');
+	// Default image scale. The scale is applied to the image, and then the image is scaled based on the space left for the canvas.
+	const	defaultScale	= (null == imageScale) ? 1.0 : imageScale;
+
+	var	offset	= document.currentScript.getAttribute('offset');
+
+	// Default image X offset, from the center of the image. Negative values offset to the left.
+	const	defaultXOffset	= (null == offset) ? 0 : offset;
 
 	// Image name
 	const imageName	= document.currentScript.getAttribute('imagePath');
+
+	// 2D context of canvas
+	const	context	= canvas.getContext('2d');
 
 	// Resized image
 	var	resizedImage	= null;
@@ -42,8 +48,16 @@
 
 		if (resizedImage != null)
 		{
-			var	scale		= window.innerHeight / defaultHeight * defaultScale;
 			var	offsetScale	= window.innerWidth / defaultWidth;
+			var	scale		= window.innerHeight / defaultHeight;
+			
+			if (offsetScale < scale)
+			{
+				scale	= offsetScale;
+			}
+
+			scale	*= defaultScale;
+			
 			var	width		= resizedImage.width * scale;
 			var	height		= resizedImage.height * scale;
 			var	x			= (canvas.width - width) / 2 + (defaultXOffset * offsetScale);
