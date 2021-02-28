@@ -1,7 +1,7 @@
 (function()
 {
 	// Canvas object
-	const canvas	= document.getElementById(document.currentScript.getAttribute('canvas'));
+	const	canvas	= document.getElementById(document.currentScript.getAttribute('canvas'));
 
 	// Default resolution of the page.
 	const	defaultWidth	= 1920;
@@ -18,7 +18,7 @@
 	const	defaultXOffset	= (null == offset) ? 0 : offset;
 
 	// Image name
-	const imageName	= document.currentScript.getAttribute('imagePath');
+	const	imageName	= document.currentScript.getAttribute('imagePath');
 
 	// 2D context of canvas
 	const	context	= canvas.getContext('2d');
@@ -36,6 +36,7 @@
 	{
 		resizedImage		= new Image();
 		resizedImage.src	= imageName;
+		
 		resizedImage.addEventListener("load", render, true);
 	}
 
@@ -57,10 +58,10 @@
 			}
 
 			scale	*= defaultScale;
-			
-			var	width		= resizedImage.width * scale;
-			var	height		= resizedImage.height * scale;
-			var	x			= (canvas.width - width) / 2 + (defaultXOffset * offsetScale);
+
+			var	width	= resizedImage.width * scale;
+			var	height	= resizedImage.height * scale;
+			var	x		= (canvas.width - width) / 2 + (defaultXOffset * offsetScale);
 
 			context.drawImage(resizedImage, x, 0, width, height);
 		}
