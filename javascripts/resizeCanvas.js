@@ -1,10 +1,10 @@
 (function()
 {
 	// Element above the canvas
-	const priorElement	= document.getElementById('introText');
+	const previousElement	= document.getElementById(document.currentScript.getAttribute('previousElement'));
 	
 	// Canvas object
-	const canvas		= document.getElementById('mascotCanvas');
+	const canvas			= document.getElementById(document.currentScript.getAttribute('canvas'));
 
 	// Default resolution of the page.
 	const	defaultWidth	= 1920;
@@ -53,9 +53,9 @@
 
 	function render()
 	{
-		if (priorElement != null)
+		if (previousElement != null)
 		{
-			var rect	= priorElement.getBoundingClientRect()
+			var rect	= previousElement.getBoundingClientRect()
 			
 			canvas.width	= window.innerWidth;
 			canvas.height	= window.innerHeight - rect.bottom;
